@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  ros2:
+    image: ghcr.io/meanotaku/gazebo_ros2_full:latest
+    container_name: ros2_gz
+    profiles: ["prod"]
+
+    network_mode: host
+
+    volumes:
+      - ./ros2_ws:/workspace
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+
+      # LazyVim persistence
+      - nvim-data:/root/.local/share/nvim
+      - nvim-state:/root/.local/state/nvim
+      - nvim-cache:/root/.cache/nvim
+
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - LIBGL_ALWAYS_SOFTWARE=1
+      - QT_QPA_PLATFORM=offscreen
+      - TURTLEBOT3_MODEL=burger   # 🔥 IMPORTANT
+      - GZ_TRANSPORT_IP=127.0.0.1
+      - GZ_PARTITION=ros
+
+    command: /usr/bin/supervisord
+    tty: true
+    stdin_open: true
+
+
+  ros2-dev:
+    build: .
+    container_name: ros2_gz_dev
+    profiles: ["dev"]
+
+    network_mode: host
+
+    volumes:
+      - ./ros2_ws:/workspace
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+
+      # LazyVim persistence
+      - nvim-data:/root/.local/share/nvim
+      - nvim-state:/root/.local/state/nvim
+      - nvim-cache:/root/.cache/nvim
+
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - LIBGL_ALWAYS_SOFTWARE=1
+      - QT_QPA_PLATFORM=offscreen
+      - TURTLEBOT3_MODEL=burger   # 🔥 IMPORTANT
+      - GZ_TRANSPORT_IP=127.0.0.1
+      - GZ_PARTITION=ros
+
+    command: /usr/bin/supervisord
+    tty: true
+    stdin_open: true
+
+
+volumes:
+  nvim-data:
+  nvim-state:
+  nvim-cache:

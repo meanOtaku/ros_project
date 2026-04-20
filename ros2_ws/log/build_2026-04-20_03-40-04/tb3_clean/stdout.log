@@ -1,0 +1,32 @@
+running egg_info
+creating ../../build/tb3_clean/tb3_clean.egg-info
+writing ../../build/tb3_clean/tb3_clean.egg-info/PKG-INFO
+writing dependency_links to ../../build/tb3_clean/tb3_clean.egg-info/dependency_links.txt
+writing requirements to ../../build/tb3_clean/tb3_clean.egg-info/requires.txt
+writing top-level names to ../../build/tb3_clean/tb3_clean.egg-info/top_level.txt
+writing manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+reading manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+writing manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /workspace/build/tb3_clean/build
+creating /workspace/build/tb3_clean/build/lib
+creating /workspace/build/tb3_clean/build/lib/tb3_clean
+copying tb3_clean/__init__.py -> /workspace/build/tb3_clean/build/lib/tb3_clean
+running install
+running install_lib
+creating /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean
+copying /workspace/build/tb3_clean/build/lib/tb3_clean/__init__.py -> /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean
+byte-compiling /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean/__init__.py to __init__.cpython-312.pyc
+running install_data
+creating /workspace/install/tb3_clean/share/ament_index
+creating /workspace/install/tb3_clean/share/ament_index/resource_index
+creating /workspace/install/tb3_clean/share/ament_index/resource_index/packages
+copying resource/tb3_clean -> /workspace/install/tb3_clean/share/ament_index/resource_index/packages
+copying package.xml -> /workspace/install/tb3_clean/share/tb3_clean
+creating /workspace/install/tb3_clean/share/tb3_clean/launch
+copying launch/sim.launch.py -> /workspace/install/tb3_clean/share/tb3_clean/launch
+running install_egg_info
+Copying ../../build/tb3_clean/tb3_clean.egg-info to /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean-0.0.0-py3.12.egg-info
+running install_scripts
+writing list of installed files to '/workspace/build/tb3_clean/install.log'
