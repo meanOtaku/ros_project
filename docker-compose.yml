@@ -22,8 +22,6 @@ services:
       - LIBGL_ALWAYS_SOFTWARE=1
       - QT_QPA_PLATFORM=offscreen
       - TURTLEBOT3_MODEL=burger   # 🔥 IMPORTANT
-      - GZ_TRANSPORT_IP=127.0.0.1
-      - GZ_PARTITION=ros
 
     command: /usr/bin/supervisord
     tty: true
@@ -51,8 +49,6 @@ services:
       - LIBGL_ALWAYS_SOFTWARE=1
       - QT_QPA_PLATFORM=offscreen
       - TURTLEBOT3_MODEL=burger   # 🔥 IMPORTANT
-      - GZ_TRANSPORT_IP=127.0.0.1
-      - GZ_PARTITION=ros
 
     command: /usr/bin/supervisord
     tty: true
