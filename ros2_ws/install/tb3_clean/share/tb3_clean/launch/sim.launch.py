@@ -1,89 +1,118 @@
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess
+from launch.actions import ExecuteProcess, TimerAction
 from launch_ros.actions import Node
-from launch.substitutions import Command
 
 def generate_launch_description():
 
+    # -----------------------------
+    # GAZEBO
+    # -----------------------------
     gz_sim = ExecuteProcess(
         cmd=[
             "gz", "sim",
             "-r",
             "-s",
-            "--iterations", "0",   # run indefinitely
             "/opt/ros/jazzy/share/turtlebot3_gazebo/worlds/empty_world.world"
         ],
         additional_env={
-            "QT_QPA_PLATFORM": "minimal",   # 🔥 critical
-            "DISPLAY": "",                  # 🔥 no X11
-            "GZ_GUI_PLUGIN_PATH": "",       # 🔥 disables GUI plugins
-            "GZ_SIM_SYSTEM_PLUGIN_PATH": "" # 🔥 prevents GUI system load
+            "QT_QPA_PLATFORM": "minimal",
+            "DISPLAY": ""
         },
         output="screen"
     )
 
-    rsp = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
+    # -----------------------------
+    # 🔥 FIXED SDF (SINGLE LINE)
+    # -----------------------------
+    sdf = """sdf: "<sdf version='1.9'><model name='tb3_fixed'>
+<pose>0 0 0.1 0 0 0</pose>
+
+<link name='base_link'>
+  <inertial><mass>1.0</mass></inertial>
+  <collision name='col'>
+    <geometry><box><size>0.3 0.3 0.2</size></box></geometry>
+  </collision>
+  <visual name='vis'>
+    <geometry><box><size>0.3 0.3 0.2</size></box></geometry>
+  </visual>
+</link>
+
+<link name='left_wheel'><pose>0 0.15 0 0 0 0</pose></link>
+<link name='right_wheel'><pose>0 -0.15 0 0 0 0</pose></link>
+
+<joint name='left_joint' type='revolute'>
+  <parent>base_link</parent>
+  <child>left_wheel</child>
+  <axis><xyz>0 1 0</xyz></axis>
+</joint>
+
+<joint name='right_joint' type='revolute'>
+  <parent>base_link</parent>
+  <child>right_wheel</child>
+  <axis><xyz>0 1 0</xyz></axis>
+</joint>
+
+<!-- 🔥 FIXED -->
+<plugin name='diff_drive' filename='gz-sim8-diff-drive-system'>
+  <left_joint>left_joint</left_joint>
+  <right_joint>right_joint</right_joint>
+  <wheel_separation>0.3</wheel_separation>
+  <wheel_radius>0.05</wheel_radius>
+  <topic>/cmd_vel</topic>
+</plugin>
+
+</model></sdf>\""""
+
+    spawn = TimerAction(
+        period=3.0,
+        actions=[
+            ExecuteProcess(
+                cmd=[
+                    "gz", "service",
+                    "-s", "/world/default/create",
+                    "--reqtype", "gz.msgs.EntityFactory",
+                    "--reptype", "gz.msgs.Boolean",
+                    "--timeout", "1000",
+                    "--req",
+                    "sdf_filename: '/workspace/models/tb3_fixed/model.sdf'"
+                ],
+                output="screen"
+            )
+        ]
+    )
+
+    # -----------------------------
+    # BRIDGE
+    # -----------------------------
+    bridge = TimerAction(
+        period=5.0,
+        actions=[
+            Node(
+                package="ros_gz_bridge",
+                executable="parameter_bridge",
+                arguments=[
+                    "/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist"
+                ],
+                output="screen"
+            )
+        ]
+    )
+
+    # -----------------------------
+    # FOXGLOVE (FIXED PORT)
+    # -----------------------------
+    foxglove = Node(
+        package="foxglove_bridge",
+        executable="foxglove_bridge",
         parameters=[{
-            "use_sim_time": True,
-            "robot_description": Command([
-                "xacro ",
-                "/opt/ros/jazzy/share/turtlebot3_description/urdf/turtlebot3_burger.urdf"
-            ])
-        }]
-    )
-
-    spawn = Node(
-        package="ros_gz_sim",
-        executable="create",
-        arguments=["-name", "turtlebot3", "-topic", "robot_description"],
+            "port": 8766   # 🔥 changed from 8765
+        }],
         output="screen"
-    )
-
-    # ✅ ONLY bridge ROS → GZ (cmd_vel)
-    bridge_cmd_vel = Node(
-        package="ros_gz_bridge",
-        executable="parameter_bridge",
-        arguments=[
-            "/model/turtlebot3/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist"
-        ],
-        remappings=[
-            ("/model/turtlebot3/cmd_vel", "/cmd_vel")
-        ],
-        output="screen"
-    )
-
-    # Sensors (safe to bridge normally)
-    bridge_sensors = Node(
-        package="ros_gz_bridge",
-        executable="parameter_bridge",
-        arguments=[
-            "/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan",
-            "/world/default/model/turtlebot3/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry",
-            "/clock@rosgraph_msgs/msg/Clock@gz.msgs.Clock"
-        ],
-        output="screen"
-    )
-
-    ekf = Node(
-        package="robot_localization",
-        executable="ekf_node",
-        parameters=[{
-            "use_sim_time": True,
-            "publish_tf": True,
-            "base_link_frame": "base_link",
-            "odom_frame": "odom",
-            "world_frame": "odom",
-            "odom0": "/world/default/model/turtlebot3/odometry"
-        }]
     )
 
     return LaunchDescription([
         gz_sim,
-        rsp,
         spawn,
-        bridge_cmd_vel,
-        bridge_sensors,
-        ekf
+        bridge,
+        foxglove
     ])

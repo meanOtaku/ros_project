@@ -1,0 +1,20 @@
+[0.406s] Invoking command in '/workspace/src/tb3_clean': PYTHONPATH=/workspace/build/tb3_clean/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/workspace/install/tb3_clean/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_clean build --build-base /workspace/build/tb3_clean/build install --record /workspace/build/tb3_clean/install.log --single-version-externally-managed install_data
+[0.521s] running egg_info
+[0.526s] writing ../../build/tb3_clean/tb3_clean.egg-info/PKG-INFO
+[0.527s] writing dependency_links to ../../build/tb3_clean/tb3_clean.egg-info/dependency_links.txt
+[0.527s] writing requirements to ../../build/tb3_clean/tb3_clean.egg-info/requires.txt
+[0.528s] writing top-level names to ../../build/tb3_clean/tb3_clean.egg-info/top_level.txt
+[0.540s] reading manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+[0.541s] writing manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+[0.541s] running build
+[0.542s] running build_py
+[0.546s] running install
+[0.550s] running install_lib
+[0.552s] running install_data
+[0.552s] copying launch/sim.launch.py -> /workspace/install/tb3_clean/share/tb3_clean/launch
+[0.558s] running install_egg_info
+[0.560s] removing '/workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean-0.0.0-py3.12.egg-info' (and everything under it)
+[0.561s] Copying ../../build/tb3_clean/tb3_clean.egg-info to /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean-0.0.0-py3.12.egg-info
+[0.566s] running install_scripts
+[0.613s] writing list of installed files to '/workspace/build/tb3_clean/install.log'
+[0.632s] Invoked command in '/workspace/src/tb3_clean' returned '0': PYTHONPATH=/workspace/build/tb3_clean/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/workspace/install/tb3_clean/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_clean build --build-base /workspace/build/tb3_clean/build install --record /workspace/build/tb3_clean/install.log --single-version-externally-managed install_data

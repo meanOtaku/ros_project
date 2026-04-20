@@ -1,0 +1,57 @@
+<sdf version="1.9">
+  <model name="tb3_fixed">
+    <pose>0 0 0.1 0 0 0</pose>
+
+    <link name="base_link">
+      <inertial><mass>1.0</mass></inertial>
+
+      <collision name="col">
+        <geometry>
+          <box><size>0.3 0.3 0.2</size></box>
+        </geometry>
+      </collision>
+
+      <visual name="vis">
+        <geometry>
+          <box><size>0.3 0.3 0.2</size></box>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="left_wheel">
+      <pose>0 0.15 0 0 0 0</pose>
+    </link>
+
+    <link name="right_wheel">
+      <pose>0 -0.15 0 0 0 0</pose>
+    </link>
+
+    <joint name="left_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>left_wheel</child>
+      <axis><xyz>0 1 0</xyz></axis>
+    </joint>
+
+    <joint name="right_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>right_wheel</child>
+      <axis><xyz>0 1 0</xyz></axis>
+    </joint>
+
+    <!-- 🔥 CORRECT plugin name -->
+    <plugin
+  name="gz::sim::systems::DiffDrive"
+  filename="gz-sim8-diff-drive-system">
+
+  <left_joint>left_joint</left_joint>
+  <right_joint>right_joint</right_joint>
+
+  <wheel_separation>0.3</wheel_separation>
+  <wheel_radius>0.05</wheel_radius>
+
+  <topic>/cmd_vel</topic>
+
+</plugin>
+
+  </model>
+</sdf>

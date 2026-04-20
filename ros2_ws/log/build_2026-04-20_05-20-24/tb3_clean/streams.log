@@ -1,0 +1,34 @@
+[0.471s] Invoking command in '/workspace/src/tb3_clean': PYTHONPATH=/workspace/build/tb3_clean/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/workspace/install/tb3_clean/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_clean build --build-base /workspace/build/tb3_clean/build install --record /workspace/build/tb3_clean/install.log --single-version-externally-managed install_data
+[0.560s] running egg_info
+[0.563s] creating ../../build/tb3_clean/tb3_clean.egg-info
+[0.565s] writing ../../build/tb3_clean/tb3_clean.egg-info/PKG-INFO
+[0.566s] writing dependency_links to ../../build/tb3_clean/tb3_clean.egg-info/dependency_links.txt
+[0.566s] writing requirements to ../../build/tb3_clean/tb3_clean.egg-info/requires.txt
+[0.566s] writing top-level names to ../../build/tb3_clean/tb3_clean.egg-info/top_level.txt
+[0.567s] writing manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+[0.579s] reading manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+[0.580s] writing manifest file '../../build/tb3_clean/tb3_clean.egg-info/SOURCES.txt'
+[0.580s] running build
+[0.580s] running build_py
+[0.580s] creating /workspace/build/tb3_clean/build
+[0.581s] creating /workspace/build/tb3_clean/build/lib
+[0.581s] creating /workspace/build/tb3_clean/build/lib/tb3_clean
+[0.581s] copying tb3_clean/__init__.py -> /workspace/build/tb3_clean/build/lib/tb3_clean
+[0.587s] running install
+[0.587s] running install_lib
+[0.590s] creating /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean
+[0.590s] copying /workspace/build/tb3_clean/build/lib/tb3_clean/__init__.py -> /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean
+[0.591s] byte-compiling /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean/__init__.py to __init__.cpython-312.pyc
+[0.592s] running install_data
+[0.592s] creating /workspace/install/tb3_clean/share/ament_index
+[0.592s] creating /workspace/install/tb3_clean/share/ament_index/resource_index
+[0.593s] creating /workspace/install/tb3_clean/share/ament_index/resource_index/packages
+[0.593s] copying resource/tb3_clean -> /workspace/install/tb3_clean/share/ament_index/resource_index/packages
+[0.593s] copying package.xml -> /workspace/install/tb3_clean/share/tb3_clean
+[0.594s] creating /workspace/install/tb3_clean/share/tb3_clean/launch
+[0.595s] copying launch/sim.launch.py -> /workspace/install/tb3_clean/share/tb3_clean/launch
+[0.595s] running install_egg_info
+[0.602s] Copying ../../build/tb3_clean/tb3_clean.egg-info to /workspace/install/tb3_clean/lib/python3.12/site-packages/tb3_clean-0.0.0-py3.12.egg-info
+[0.605s] running install_scripts
+[0.648s] writing list of installed files to '/workspace/build/tb3_clean/install.log'
+[0.664s] Invoked command in '/workspace/src/tb3_clean' returned '0': PYTHONPATH=/workspace/build/tb3_clean/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/workspace/install/tb3_clean/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/tb3_clean build --build-base /workspace/build/tb3_clean/build install --record /workspace/build/tb3_clean/install.log --single-version-externally-managed install_data
