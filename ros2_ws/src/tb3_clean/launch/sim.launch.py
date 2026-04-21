@@ -41,7 +41,7 @@ def generate_launch_description():
     # SPAWN CUBE
     # -----------------------------
     spawn = TimerAction(
-        period=3.0,
+        period=6.0,
         actions=[
             ExecuteProcess(
                 cmd=[
@@ -62,7 +62,7 @@ def generate_launch_description():
     # BRIDGE
     # -----------------------------
     bridge = TimerAction(
-        period=4.0,
+        period=8.0,
         actions=[
             Node(
                 package="ros_gz_bridge",
