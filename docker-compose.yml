@@ -21,7 +21,9 @@ services:
       - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
       - LIBGL_ALWAYS_SOFTWARE=1
       - QT_QPA_PLATFORM=offscreen
-      - TURTLEBOT3_MODEL=burger   # 🔥 IMPORTANT
+      - TURTLEBOT3_MODEL=burger
+      - MESA_GL_VERSION_OVERRIDE=3.3        # 🔥 add this
+      - MESA_GLSL_VERSION_OVERRIDE=330      # 🔥 add this
 
     command: /usr/bin/supervisord
     tty: true
@@ -45,10 +47,12 @@ services:
       - nvim-cache:/root/.cache/nvim
 
     environment:
-      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-      - LIBGL_ALWAYS_SOFTWARE=1
-      - QT_QPA_PLATFORM=offscreen
-      - TURTLEBOT3_MODEL=burger   # 🔥 IMPORTANT
+    - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    - LIBGL_ALWAYS_SOFTWARE=1
+    - QT_QPA_PLATFORM=offscreen
+    - TURTLEBOT3_MODEL=burger
+    - MESA_GL_VERSION_OVERRIDE=3.3        # 🔥 add this
+    - MESA_GLSL_VERSION_OVERRIDE=330      # 🔥 add this
 
     command: /usr/bin/supervisord
     tty: true

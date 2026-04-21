@@ -1,36 +1,38 @@
 <sdf version="1.9">
   <model name="cube_bot">
-    <pose>0 0 0.2 0 0 0</pose>
 
-    <!-- BODY -->
+    <pose>0 0 0.1 0 0 0</pose>
+
+    <!-- BASE -->
     <link name="base_link">
       <inertial>
-        <mass>2.0</mass>
+        <mass>1.0</mass>
       </inertial>
 
       <collision name="collision">
         <geometry>
-          <box><size>0.4 0.4 0.2</size></box>
+          <box><size>0.3 0.3 0.2</size></box>
         </geometry>
       </collision>
 
       <visual name="visual">
         <geometry>
-          <box><size>0.4 0.4 0.2</size></box>
+          <box><size>0.3 0.3 0.2</size></box>
         </geometry>
       </visual>
     </link>
 
     <!-- LEFT WHEEL -->
     <link name="left_wheel">
-      <pose>0 0.2 0 0 0 0</pose>
+      <pose>0 0.15 0 0 0 0</pose>
     </link>
 
     <!-- RIGHT WHEEL -->
     <link name="right_wheel">
-      <pose>0 -0.2 0 0 0 0</pose>
+      <pose>0 -0.15 0 0 0 0</pose>
     </link>
 
+    <!-- JOINTS -->
     <joint name="left_joint" type="revolute">
       <parent>base_link</parent>
       <child>left_wheel</child>
@@ -43,26 +45,20 @@
       <axis><xyz>0 1 0</xyz></axis>
     </joint>
 
-    <!-- 🔥 Diff Drive -->
+    <!-- ✅ CORRECT DIFF DRIVE -->
     <plugin
-  name="gz::sim::systems::DiffDrive"
-  filename="gz-sim8-diff-drive-system">
+        filename="gz-sim-diff-drive-system"
+        name="gz::sim::systems::DiffDrive">
 
-  <left_joint>left_joint</left_joint>
-  <right_joint>right_joint</right_joint>
+      <left_joint>left_joint</left_joint>
+      <right_joint>right_joint</right_joint>
 
-  <wheel_separation>0.4</wheel_separation>
-  <wheel_radius>0.05</wheel_radius>
+      <wheel_separation>0.3</wheel_separation>
+      <wheel_radius>0.05</wheel_radius>
 
-  <!-- control -->
-  <topic>/cmd_vel</topic>
+      <topic>/model/cube_bot/cmd_vel</topic>
 
-  <!-- 🔥 CRITICAL: ENABLE ODOM -->
-  <odom_topic>/model/cube_bot/odometry</odom_topic>
-  <odom_frame>odom</odom_frame>
-  <base_frame>base_link</base_frame>
-
-</plugin>
+    </plugin>
 
   </model>
 </sdf>
